@@ -12,8 +12,10 @@ const connectDB = async () => {
     console.log('MongoDB connected');
   } catch (error) {
     console.error('Error connecting to MongoDB:', error.message);
-    process.exit(1); // ออกจากกระบวนการหากการเชื่อมต่อล้มเหลว
+    process.exit(1); // Exit process if connection fails
   }
 };
 
 export default connectDB;
+
+
