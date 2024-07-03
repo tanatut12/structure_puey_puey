@@ -2,7 +2,7 @@
 This is an e-commerce API project.
 
 
-ืpnpm install 
+pnpm install 
 express 
 mongoose
 dotenv
