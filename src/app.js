@@ -4,12 +4,12 @@ import express from 'express';
 import cors from 'cors';
 import connectDB from './utils/db.js';
 import multer from 'multer';
-import path from 'path'
+import path from 'path';
 
 // Import Routes
 import productRoutes from './routes/productRoutes.js';
 import authRoutes from './routes/authRoutes.js'; // Import the new auth routes
-
+import cartRoutes from './routes/cartRoutes.js';
 // Server config
 dotenv.config();
 const app = express();
@@ -24,29 +24,30 @@ connectDB().then(() => {
   });
 });
 
-
 //api upload img
 const storage = multer.diskStorage({
   destination: './upload/images',
-  filename:(req,file,cb)=>{
-      return cb(null,`${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`)
-  }
-})
+  filename: (req, file, cb) => {
+    return cb(
+      null,
+      `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`,
+    );
+  },
+});
 
-const upload = multer({storage:storage})
+const upload = multer({ storage: storage });
 
 //Creating Upload img
-app.use('/images', express.static("./upload/images"))
+app.use('/images', express.static('./upload/images'));
 
-app.post("/upload",upload.single('product'),(req,res)=>{
+app.post('/upload', upload.single('product'), (req, res) => {
   res.json({
-      success:1,
-      Image_url:`http://localhost:${PORT}/images/${req.file.filename}`
-  })
-})
-
-
+    success: 1,
+    Image_url: `http://localhost:${PORT}/images/${req.file.filename}`,
+  });
+});
 
 // API routes
 app.use('/', productRoutes);
 app.use('/api/auth', authRoutes); // new auth routes
+app.use('/cart', cartRoutes);
