@@ -1,21 +1,36 @@
+import mongoose from 'mongoose';
 
-import multer from "multer"
-
-const storage = multer.diskStorage({
-    destination: './upload/images',
-    filename:(req,file,cb)=>{
-        return cb(null,`${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`)
+const Order = mongoose.model("Order", {
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
+    products: [
+        {
+            productId: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Product',
+                required: true
+            },
+            quantity: {
+                type: Number,
+                required: true
+            }
+        }
+    ],
+    totalPrice: {
+        type: Number,
+        required: true
+    },
+    status: {
+        type: String,
+        default: 'pending'
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
     }
-  })
-  
-  const upload = multer({storage:storage})
-  
-  //Creating Upload img
-  app.use('/images', express.static("./upload/images"))
-  
-  app.post("/upload",upload.single('product'),(req,res)=>{
-    res.json({
-        success:1,
-        Image_url:`http://localhost:${PORT}/images/${req.file.filename}`
-    })
-  })
+});
+
+export default Order;
