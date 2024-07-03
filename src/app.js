@@ -9,7 +9,8 @@ import path from 'path';
 // Import Routes
 import productRoutes from './routes/productRoutes.js';
 import authRoutes from './routes/authRoutes.js'; // Import the new auth routes
-import cartRoutes from './routes/cartRoutes.js';
+import cartRoutes from './routes/cartRoutes.js';import orderRoutes from './routes/orderRoutes.js'; 
+
 // Server config
 dotenv.config();
 const app = express();
@@ -51,3 +52,4 @@ app.post('/upload', upload.single('product'), (req, res) => {
 app.use('/', productRoutes);
 app.use('/api/auth', authRoutes); // new auth routes
 app.use('/cart', cartRoutes);
+app.use('/api/order',orderRoutes); // new order routes
