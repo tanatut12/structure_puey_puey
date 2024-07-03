@@ -10,6 +10,7 @@ import path from 'path';
 import productRoutes from './routes/productRoutes.js';
 import authRoutes from './routes/authRoutes.js'; // Import the new auth routes
 import cartRoutes from './routes/cartRoutes.js';
+import orderRoutes from './routes/orderRoutes.js';
 
 // Server config
 dotenv.config();
@@ -51,4 +52,6 @@ app.post('/upload', upload.single('product'), (req, res) => {
 // API routes
 app.use('/', productRoutes);
 app.use('/api/auth', authRoutes); // new auth routes
+app.use('/cart', cartRoutes);
+app.use('/api/order', orderRoutes); // new order routes
 app.use('/cart', cartRoutes);
