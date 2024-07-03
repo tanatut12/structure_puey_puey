@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import express from 'express';
 import cors from 'cors';
 import connectDB from './utils/db.js';
+import multer from 'multer';
 
 // Import Routes
 import productRoutes from './routes/productRoutes.js';
