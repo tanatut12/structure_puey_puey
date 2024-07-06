@@ -12,15 +12,15 @@ const router = express.Router();
 
 
 // get all product
-router.get('/', getAllProducts);
+router.get('/Products', getAllProducts);
 // get product by id
-router.get('/product/:_id', getProductById)
+router.get('/Products/:_id', getProductById)
 // add product api
 router.post('/', postAllProducts)
 // delete product
 router.post('/delete',deleteProduct)
 // edit product
-router.patch('/products/:_id',updateProductById)
+router.patch('/Products/:_id',updateProductById)
 
 
 
