@@ -12,14 +12,13 @@ import authRoutes from './routes/authRoutes.js'; // Import the new auth routes
 import cartRoutes from './routes/cartRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
 
-// Server config
 dotenv.config();
 const app = express();
 app.use(express.json());
 const PORT = process.env.PORT;
 app.use(cors());
 
-// Database connection
+
 connectDB().then(() => {
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
@@ -54,4 +53,4 @@ app.use('/', productRoutes);
 app.use('/api/auth', authRoutes); // new auth routes
 app.use('/cart', cartRoutes);
 app.use('/api/order', orderRoutes); // new order routes
-app.use('/cart', cartRoutes);
+

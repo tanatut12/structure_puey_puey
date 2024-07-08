@@ -1,13 +1,13 @@
-// src/middlewares/authMiddleware/validateInput.js
-const validateInput = (fields) => {
-    return (req, res, next) => {
-        for (const field of fields) {
-            if (!req.body[field]) {
-                return res.status(400).json({ message: `${field} is required` });
-            }
-        }
-        next();
-    };
+// validateInput.js
+// validateInput.js
+import { body } from 'express-validator';
+
+const validateInput = fields => {
+    return [
+        body('email').optional().isEmail().withMessage('Invalid value for email'),
+        body('username').optional().isString().withMessage('Invalid value for username'),
+        body('password').exists().isString().withMessage('Password is required'),
+    ];
 };
 
 export default validateInput;
