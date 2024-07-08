@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
 import User from '../../models/userModel.js';
+import jwt from 'jsonwebtoken';
 
 export const loginUser = async (req, res) => {
     const { email, username, password } = req.body;
@@ -28,9 +29,17 @@ export const loginUser = async (req, res) => {
             return res.status(400).json({ message: 'Invalid credentials' });
         }
 
-        res.status(200).json({ message: 'Login successful', user });
+        const tokenPayload = { _id: user._id, isAdmin: user.isAdmin };
+        const token = jwt.sign(tokenPayload, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+        res.status(200).json({ message: 'Login successful', user ,token });
     } catch (error) {
         console.error('Error logging in:', error);
         res.status(500).json({ message: 'Internal Server Error' });
     }
+};
+
+
+export const logoutUser = (req, res) => {
+    res.status(200).json({ message: 'Logout successful' });
 };
