@@ -12,14 +12,13 @@ import authRoutes from './routes/authRoutes.js'; // Import the new auth routes
 import cartRoutes from './routes/cartRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
 
-// Server config
 dotenv.config();
 const app = express();
 app.use(express.json());
 const PORT = process.env.PORT;
 app.use(cors());
 
-// Database connection
+
 connectDB().then(() => {
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
@@ -45,7 +44,7 @@ app.use('/images', express.static('./upload/images'));
 app.post('/upload', upload.single('product'), (req, res) => {
   res.json({
     success: 1,
-    Image_url: `http://localhost:${PORT}/images/${req.file.filename}`,
+    Image_url: `https://structure-puey-puey.onrender.com:${PORT}/images/${req.file.filename}`,
   });
 });
 
@@ -54,4 +53,4 @@ app.use('/', productRoutes);
 app.use('/api/auth', authRoutes); // new auth routes
 app.use('/cart', cartRoutes);
 app.use('/api/order', orderRoutes); // new order routes
-app.use('/cart', cartRoutes);
+
