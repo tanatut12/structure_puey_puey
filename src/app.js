@@ -55,3 +55,15 @@ app.use('/api/auth', authRoutes); // new auth routes
 app.use('/cart', cartRoutes);
 app.use('/api/order', orderRoutes); // new order routes
 app.use('/cart', cartRoutes);
+
+// next() error
+app.use((err, req, res, next) => {
+  const errorStatus = err.status || 500;
+  const errorMessage = err.status || 'Something went wrong';
+  return res.status(errorStatus).json({
+    success: false,
+    status: errorStatus,
+    message: errorMessage,
+    stack: err.stack,
+  });
+});
