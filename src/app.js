@@ -44,7 +44,7 @@ app.use('/images', express.static('./upload/images'));
 app.post('/upload', upload.single('product'), (req, res) => {
   res.json({
     success: 1,
-    Image_url: `https://structure-puey-puey.onrender.com:${PORT}/images/${req.file.filename}`,
+    Image_url: `https://structure-puey-puey.onrender.com/${PORT}/images/${req.file.filename}`,
   });
 });
 
