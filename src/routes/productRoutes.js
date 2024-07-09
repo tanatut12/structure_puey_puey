@@ -4,7 +4,8 @@ import postAllProducts from '../controllers/products/addProductController.js';
 import getProductById from '../controllers/products/getProductController.js'
 import deleteProduct from '../controllers/products/deleteProductController.js';
 import updateProductById from '../controllers/products/updateProductController.js';
-
+import upload from '../middlewares/uploadMiddleware/uploadMiddleware.js';
+import { uploadImage } from '../controllers/products/uploadPhotoController.js';
 
 
 
@@ -21,8 +22,8 @@ router.post('/', postAllProducts)
 router.post('/delete',deleteProduct)
 // edit product
 router.patch('/Products/:_id',updateProductById)
-
-
+// upload photo
+router.post('/upload', upload.single('product'), uploadImage);
 
 
 export default router
