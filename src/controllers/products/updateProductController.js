@@ -1,6 +1,6 @@
 import Product from '../../models/productModel.js';
 
-const updateProductById = async (req, res) => {
+const updateProductById = async (req, res, next) => {
   try {
     const { _id } = req.params;
     const updates = req.body;
@@ -17,7 +17,7 @@ const updateProductById = async (req, res) => {
 
     res.send(updatedProduct);
   } catch (error) {
-    res.status(400).send({ error: error.message });
+    next(error);
   }
 };
 

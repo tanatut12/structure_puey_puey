@@ -1,6 +1,6 @@
 import Cart from '../../models/cartModel.js';
 
-const clearCart = async (req, res) => {
+const clearCart = async (req, res, next) => {
   try {
     const cart = await Cart.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
@@ -11,7 +11,7 @@ const clearCart = async (req, res) => {
     }
     res.status(200).send(cart);
   } catch (error) {
-    res.status(400).send(error);
+    next(error);
   }
 };
 
