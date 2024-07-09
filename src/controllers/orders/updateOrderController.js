@@ -1,7 +1,7 @@
 // api 33
 import Order from '../../models/orderModel.js';
 
-const updateOrder = async (req, res) => {
+const updateOrder = async (req, res, next) => {
   try {
     const { id } = req.params;
     const updates = req.body;
@@ -20,7 +20,7 @@ const updateOrder = async (req, res) => {
       message: 'Order updated successfully',
     });
   } catch (error) {
-    res.status(400).send({ error: error.message });
+    next(error);
   }
 };
 
