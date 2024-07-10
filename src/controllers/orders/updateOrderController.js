@@ -1,7 +1,8 @@
 // api 33
 import Order from '../../models/orderModel.js';
+import NotFoundError from '../../error/NotFoundError.js';
 
-const updateOrder = async (req, res) => {
+const updateOrder = async (req, res, next) => {
   try {
     const { id } = req.params;
     const updates = req.body;
@@ -12,7 +13,7 @@ const updateOrder = async (req, res) => {
       runValidators: true,
     });
     if (!updateOrder) {
-      return res.status(404).send({ error: 'Order not found' });
+      throw new NotFoundError({ error: 'Order not found' });
     }
 
     return res.json({
@@ -20,7 +21,7 @@ const updateOrder = async (req, res) => {
       message: 'Order updated successfully',
     });
   } catch (error) {
-    res.status(400).send({ error: error.message });
+    next(error);
   }
 };
 
