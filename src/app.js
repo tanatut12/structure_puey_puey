@@ -18,7 +18,6 @@ app.use(express.json());
 const PORT = process.env.PORT;
 app.use(cors());
 
-
 connectDB().then(() => {
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
@@ -26,29 +25,43 @@ connectDB().then(() => {
 });
 
 //api upload img
-const storage = multer.diskStorage({
-  destination: './upload/images',
-  filename: (req, file, cb) => {
-    return cb(
-      null,
-      `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`,
-    );
-  },
-});
+// const storage = multer.diskStorage({
+//   destination: './upload/images',
+//   filename: (req, file, cb) => {
+//     return cb(
+//       null,
+//       `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`,
+//     );
+//   },
+// });
 
-const upload = multer({ storage: storage });
+// const upload = multer({ storage: storage });
 
-//Creating Upload img
-app.use('/images', express.static('./upload/images'));
+// //Creating Upload img
+// app.use('/images', express.static('./upload/images'));
 
-app.post('/upload', upload.single('product'), (req, res) => {
-  res.json({
-    success: 1,
-    Image_url: `http://localhost:${PORT}/images/${req.file.filename}`,
-  });
-});
+// app.post('/upload', upload.single('product'), (req, res) => {
+//   res.json({
+//     success: 1,
+//     Image_url: `https://structure-puey-puey.onrender.com/${PORT}/images/${req.file.filename}`,
+//   });
+// });
 
 // API routes
 app.use('/', productRoutes);
-app.use('/api/auth', authRoutes); 
+app.use('/api/auth', authRoutes); // new auth routes
 app.use('/cart', cartRoutes);
+app.use('/api/order', orderRoutes); // new order routes
+app.use('/cart', cartRoutes);
+
+// next() error
+app.use((err, req, res, next) => {
+  const errorStatus = err.status || 500;
+  const errorMessage = err.status || 'Something went wrong';
+  return res.status(errorStatus).json({
+    success: false,
+    status: errorStatus,
+    message: errorMessage,
+    stack: err.stack,
+  });
+});

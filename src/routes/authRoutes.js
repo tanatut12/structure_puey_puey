@@ -14,7 +14,7 @@ router.post(
   registerLimiter,
   sanitizeRegisterInput,
   validateInput(['username', 'email', 'password']),
-  registerUser
+  registerUser,
 );
 
 router.get('/verify/:token', verifyUser);

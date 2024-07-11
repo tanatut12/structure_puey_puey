@@ -1,14 +1,15 @@
+import NotFoundError from '../../error/NotFoundError.js';
 import Cart from '../../models/cartModel.js';
 
-const removeFromCart = async (req, res) => {
+const removeFromCart = async (req, res, next) => {
   try {
     const cart = await Cart.findByIdAndDelete(req.params.id);
     if (!cart) {
-      return res.status(404).send();
+      throw new NotFoundError(`Cart can't remove`);
     }
     res.status(200).send(cart);
   } catch (error) {
-    res.status(500).send(error);
+    next(error);
   }
 };
 
