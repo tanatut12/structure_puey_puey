@@ -9,13 +9,16 @@ export const authMiddleware = (req, res, next) => {
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        console.log('Decoded Token:', decoded); // Log the decoded token for debugging
         req.user = decoded;
 
         next();
     } catch (error) {
+        console.error('Token Verification Error:', error); // Log error for debugging
         res.status(400).json({ message: 'Invalid token' });
     }
 };
+
 
 export const adminMiddleware = (req, res, next) => {
     if (!req.user?.isAdmin) {

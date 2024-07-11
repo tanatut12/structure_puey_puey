@@ -49,10 +49,10 @@ connectDB().then(() => {
 
 // API routes
 app.use('/', productRoutes);
-app.use('/api/auth', authRoutes); // new auth routes
+app.use('/api/auth', authRoutes); 
 app.use('/cart', cartRoutes);
-app.use('/api/order', orderRoutes); // new order routes
-app.use('/cart', cartRoutes);
+app.use('/api/order', orderRoutes); 
+
 
 // next() error
 app.use((err, req, res, next) => {
