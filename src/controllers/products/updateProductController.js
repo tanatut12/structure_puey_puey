@@ -1,4 +1,5 @@
 import Product from '../../models/productModel.js';
+import NotFoundError from '../../error/NotFoundError.js';
 
 const updateProductById = async (req, res, next) => {
   try {
@@ -12,7 +13,7 @@ const updateProductById = async (req, res, next) => {
     });
 
     if (!updatedProduct) {
-      return res.status(404).send({ error: 'Product not found' });
+      throw new NotFoundError({ error: 'Product not found' });
     }
 
     res.send(updatedProduct);

@@ -1,3 +1,4 @@
+import NotFoundError from '../../error/NotFoundError.js';
 import Cart from '../../models/cartModel.js';
 
 const clearCart = async (req, res, next) => {
@@ -7,7 +8,7 @@ const clearCart = async (req, res, next) => {
       runValidators: true,
     });
     if (!cart) {
-      return res.status(404).send();
+      throw new NotFoundError(`Cart can't update`);
     }
     res.status(200).send(cart);
   } catch (error) {
