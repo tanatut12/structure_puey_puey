@@ -1,15 +1,18 @@
 // api 30
+import Order from '../../models/orderModel.js';
 
-import Order from "../../models/orderModel.js";
+const getOrder = async (req, res, next) => {
+  try {
+    const order = await Order.findById(req.params.orderId);
+    console.log('fetch one');
 
-    const getOrder = async (req,res) =>{
-    try {
-        const order = await Order.find();
-        res.send(order);
-
-    } catch (error) {
-        res.status(500).send("Server Error");
+    if (!order) {
+      return res.status(404).send('Order not found');
     }
+    res.send(order);
+  } catch (error) {
+    next(error);
+  }
 };
 
 export default getOrder;
