@@ -4,21 +4,13 @@ import express from 'express';
 import cors from 'cors';
 import connectDB from './utils/db.js';
 import multer from 'multer';
-<<<<<<< HEAD
-
-// Import Routes
-import productRoutes from './routes/productRoutes.js';
-import authRoutes from './routes/authRoutes.js'; 
-
-=======
 import path from 'path';
 
 // Import Routes
 import productRoutes from './routes/productRoutes.js';
-import authRoutes from './routes/authRoutes.js'; // Import the new auth routes
+import authRoutes from './routes/authRoutes.js'; 
 import cartRoutes from './routes/cartRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
->>>>>>> 4228bf2ae629f4987698fee6144cc517a78772f8
 
 dotenv.config();
 const app = express();
@@ -58,12 +50,5 @@ app.post('/upload', upload.single('product'), (req, res) => {
 
 // API routes
 app.use('/', productRoutes);
-<<<<<<< HEAD
 app.use('/api/auth', authRoutes); 
-
-=======
-app.use('/api/auth', authRoutes); // new auth routes
 app.use('/cart', cartRoutes);
-app.use('/api/order', orderRoutes); // new order routes
-app.use('/cart', cartRoutes);
->>>>>>> 4228bf2ae629f4987698fee6144cc517a78772f8
