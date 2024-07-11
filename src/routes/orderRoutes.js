@@ -11,13 +11,13 @@ const router = express.Router();
 router.post('/create-order', createOrder);
 
 // get orders get OrdersController
-router.get('/orders', getOrder);
+router.get('/', getOrders);
 
 // get order by id getOrderController
-router.get('/orders/:orderId', getOrders);
+router.get('/:orderId', getOrder);
 
 // update order > patch updateOrderController
-router.patch('/orders/:orderId', updateOrder);
+router.patch('/:orderId', updateOrder);
 // cancel order > delete cancelOrderController
-router.post('/orders/:orderId', deleteOrder);
+router.post('/:orderId', deleteOrder);
 export default router;
