@@ -1,11 +1,12 @@
 import Product from '../../models/productModel.js';
+import NotFoundError from '../../error/NotFoundError.js';
 
 const getProductById = async (req, res, next) => {
   try {
     const product = await Product.findById(req.params._id);
     console.log('fetch one');
     if (!product) {
-      return res.status(404).send('item not found');
+      throw new NotFoundError('Item not found');
     }
     res.send(product);
   } catch (error) {

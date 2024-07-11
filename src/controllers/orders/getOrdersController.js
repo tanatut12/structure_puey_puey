@@ -1,5 +1,6 @@
 // api 31
 import Order from '../../models/orderModel.js';
+import NotFoundError from '../../error/NotFoundError.js';
 
 const getOrders = async (req, res, next) => {
   try {
@@ -7,7 +8,7 @@ const getOrders = async (req, res, next) => {
     console.log('fetch one');
 
     if (!order) {
-      return res.status(404).send('Order not found');
+      throw new NotFoundError('Order not found');
     }
     res.send(order);
   } catch (error) {

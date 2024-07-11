@@ -8,7 +8,7 @@ import path from 'path';
 
 // Import Routes
 import productRoutes from './routes/productRoutes.js';
-import authRoutes from './routes/authRoutes.js'; // Import the new auth routes
+import authRoutes from './routes/authRoutes.js'; 
 import cartRoutes from './routes/cartRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
 
