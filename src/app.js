@@ -29,8 +29,8 @@ connectDB().then(() => {
 app.use('/', productRoutes);
 app.use('/api/auth', authRoutes); // new auth routes
 app.use('/cart', cartRoutes);
-app.use('/api/order', orderRoutes); // new order routes
-app.use('/cart', cartRoutes);
+app.use('/orders', orderRoutes); // new order routes
+
 
 // next() error
 app.use((err, req, res, next) => {

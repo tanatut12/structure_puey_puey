@@ -1,12 +1,9 @@
 // api 31
-import Order from '../../models/orderModel.js';
-import NotFoundError from '../../error/NotFoundError.js';
+import Order from "../../models/orderModel.js";
 
 const getOrders = async (req, res, next) => {
   try {
-    const order = await Order.findById(req.params.orderId);
-    console.log('fetch one');
-
+    const order = await Order.find();
     if (!order) {
       throw new NotFoundError('Order not found');
     }
