@@ -8,7 +8,7 @@ import path from 'path';
 
 // Import Routes
 import productRoutes from './routes/productRoutes.js';
-import authRoutes from './routes/authRoutes.js'; 
+import authRoutes from './routes/authRoutes.js';
 import cartRoutes from './routes/cartRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
 
@@ -24,13 +24,11 @@ connectDB().then(() => {
   });
 });
 
-
 // API routes
 app.use('/', productRoutes);
 app.use('/api/auth', authRoutes); // new auth routes
 app.use('/cart', cartRoutes);
 app.use('/orders', orderRoutes); // new order routes
-
 
 // next() error
 app.use((err, req, res, next) => {

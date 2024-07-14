@@ -3,12 +3,13 @@ import Cart from '../../models/cartModel.js';
 
 const clearCart = async (req, res, next) => {
   try {
-    const cart = await Cart.findByIdAndUpdate(req.params.id, req.body, {
+    const { userId } = req.params;
+    const cart = await Cart.findOneAndUpdate({ user: userId }, { products: [] }, {
       new: true,
-      runValidators: true,
+      runValidators: true
     });
     if (!cart) {
-      throw new NotFoundError(`Cart can't update`);
+      throw new NotFoundError(`Cart not found`);
     }
     res.status(200).send(cart);
   } catch (error) {
