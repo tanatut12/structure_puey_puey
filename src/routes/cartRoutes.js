@@ -6,13 +6,16 @@ import clearCart from '../controllers/cart/clearCartController.js';
 
 const router = express.Router();
 
-//get cart by id user
+
 router.get('/:userId', getCartByIdUser);
-//add product in cart
+
+
 router.post('/:userId/add', addToCart);
-// remove cart (Update)
-router.patch('/:userId/remove', clearCart);
-// delete cart
-router.delete('/:userId', removeFromCart);
+
+
+router.patch('/:userId/clear', clearCart);
+
+
+router.delete('/:userId/remove/:productId', removeFromCart);
 
 export default router;
