@@ -2,10 +2,14 @@ import Cart from '../../models/cartModel.js';
 
 const getCartByIdUser = async (req, res, next) => {
   try {
-    const carts = await Cart.find()
+    const { userId } = req.params;
+    const cart = await Cart.findOne({ user: userId })
       .populate('user')
       .populate('products.productId');
-    res.status(200).send(carts);
+    if (!cart) {
+      return res.status(404).send({ error: "Cart not found" });
+    }
+    res.status(200).send(cart);
   } catch (error) {
     next(error);
   }
