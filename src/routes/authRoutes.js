@@ -5,6 +5,7 @@ import sanitizeRegisterInput from '../middlewares/authMiddleware/sanitizeInput.j
 import registerLimiter from '../middlewares/authMiddleware/rateLimit.js';
 import { validateInput, validateLoginInput } from '../middlewares/authMiddleware/validateInput.js';
 import { authMiddleware, adminMiddleware } from '../middlewares/authMiddleware/authMiddleware.js';
+import { getUserData } from '../controllers/users/getUserController.js';
 // import { requestPasswordReset, resetPassword } from '../controllers/users/passwordResetController.js';
 
 const router = express.Router();
@@ -17,6 +18,8 @@ router.post(
   registerUser,
 );
 
+
+router.get('/user', authMiddleware, getUserData);
 router.get('/verify/:token', verifyUser);
 router.post('/resend-verification', resendVerificationEmail);
 router.post('/login', validateLoginInput(), loginUser);  
